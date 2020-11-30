@@ -99,6 +99,12 @@ end
 % c is a matrix storing the expansion coefficients of the eigenfunctions of
 % the generator in the eigenbasis of diffOp
 tWall0 = tic;
+
+% TO DO: check change
+V
+V(isnan(V))=0;
+%V
+
 [ c, gamma ]  = eig( V );
 gamma         = diag( gamma ).';
 tWall         = toc( tWall0 );
