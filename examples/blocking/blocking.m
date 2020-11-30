@@ -15,9 +15,10 @@
 % Modified 2020/10/27
 
 %% DATA ANALYSIS SPECIFICATION 
-tLim       = { '20101230' '20111031' };
+% tLim       = { '20101230' '20111031' };
+tLim       = { '20100101' '20181031' }; % im curious if we should separate by seasons?run
 sourceVar  = 'z500';     
-embWindow  = 5;  % approx time scale     
+embWindow  = 20;  % approx time scale, was 5     
 kernel     = 'cone';       % cone kernel      
 %kernel     = 'l2';       % L2 kernel      
 
@@ -28,7 +29,7 @@ kernel     = 'cone';       % cone kernel
 ifDataSource = false;  % extract source data fron netCDF files
 
 % Spectral decomposition
-ifNLSA    = true;  % compute kernel (NLSA) eigenfunctions
+ifNLSA    = false;  % compute kernel (NLSA) eigenfunctions
 ifKoopman = true;  % compute Koopman eigenfunctions
 
 % Reconstruction
@@ -60,7 +61,7 @@ experiment = { sourceVar ...
                sprintf( 'emb%i', embWindow ) ...
                [ kernel 'Kernel' ]  };
 experiment = strjoin_e( experiment, '_' );
-
+experiment
 [ model, In ] = blocking_nlsaModel( experiment ); 
 toc( t )
 
