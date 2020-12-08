@@ -1,6 +1,7 @@
 %% NLSA/KOOPMAN ANALYSIS OF Z500 DATA FOR BLOCKING
 %
 % phi   = getDiffusionEigenfunctions( model ); -- NLSA eigenfunctions
+% lambda = getDiffusionEigenvalues(model); -- NLSA evenvalues
 % z     = getKoopmanEigenfunctions( model );   -- Koopman eigenfunctions
 % gamma = getKoopmanEigenvalues( model ) * 12 / (2*pi) -- Koopman eigenvalues  
 % T     = getKoopmanEigenperiods( model ) / 12; -- Koopman eigenperiods
@@ -15,8 +16,8 @@
 % Modified 2020/10/27
 
 %% DATA ANALYSIS SPECIFICATION 
-% tLim       = { '20101230' '20111031' };
-tLim       = { '20100101' '20181031' }; % im curious if we should separate by seasons?run
+%tLim       = { '20101230' '20111031' };
+tLim       = { '20101230' '20181031' }; % im curious if we should separate by seasons?run
 sourceVar  = 'z500';     
 embWindow  = 20;  % approx time scale, was 5     
 kernel     = 'cone';       % cone kernel      
@@ -29,7 +30,7 @@ kernel     = 'cone';       % cone kernel
 ifDataSource = false;  % extract source data fron netCDF files
 
 % Spectral decomposition
-ifNLSA    = false;  % compute kernel (NLSA) eigenfunctions
+ifNLSA    = true;  % compute kernel (NLSA) eigenfunctions
 ifKoopman = true;  % compute Koopman eigenfunctions
 
 % Reconstruction
