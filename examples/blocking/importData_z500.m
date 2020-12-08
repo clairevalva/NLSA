@@ -105,7 +105,7 @@ ifNewfile = true;
 
 while iT <= nT
 
-    ttt = datetime(datestr(tNum( iT )));
+    ttt = tNum( iT );
 
     %y = year( tNum( iT ) ); % orginally all like this, don't know why annoying
     y = year( ttt);
@@ -115,8 +115,9 @@ while iT <= nT
     if ifNewfile
         file = fullfile( In.dir, sprintf( '%i_%s.nc', y, In.file ) );  
         disp( sprintf( 'Opening file %s...', file ) )
-        nCId = netcdf.open( file );
+        ncId = netcdf.open( file );
         fldFile = netcdf.getVar( ncId, idFld );
+        disp( y ); size(fldFile)
     end
 
     fldT = reshape( fldFile( m, d, :, :, : ), [ 4, nX * nY ] ); 
@@ -125,7 +126,7 @@ while iT <= nT
     iT = iT + 1;
     
     if iT <= nT
-        ifNewfile = year( ttt ) ~= y;
+        ifNewfile = year( tNum( iT ) ) ~= y;
     end
 end
 
