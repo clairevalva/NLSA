@@ -171,7 +171,7 @@ case 'z500_20120101-20130230_emb20_l2Kernel'
     In.alpha      = 0.5;        % diffusion maps normalization 
     In.nPhi       = 16;         % diffusion eigenfunctions to compute
     In.nPhiPrj    = In.nPhi;    % eigenfunctions to project the data
-    In.idxPhiRec  = [ [ 2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]];    % eigenfunctions for reconstruction
+    In.idxPhiRec  = [ 1:12];    % eigenfunctions for reconstruction
     In.idxPhiSVD  = 1 : 1;        % eigenfunctions for linear mapping
     In.idxVTRec   = 1 : 1;        % SVD termporal patterns for reconstruction
 
@@ -349,7 +349,7 @@ case 'z500_20120101-20130230_emb50_l2Kernel'
     In.alpha      = 0.5;        % diffusion maps normalization 
     In.nPhi       = 16;         % diffusion eigenfunctions to compute
     In.nPhiPrj    = In.nPhi;    % eigenfunctions to project the data
-    In.idxPhiRec  = [ 2 3 ];    % eigenfunctions for reconstruction
+    In.idxPhiRec  = [ 1:12];    % eigenfunctions for reconstruction
     In.idxPhiSVD  = 1 : 1;        % eigenfunctions for linear mapping
     In.idxVTRec   = 1 : 1;        % SVD termporal patterns for reconstruction
 

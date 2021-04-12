@@ -7,6 +7,8 @@
 % T     = getKoopmanEigenperiods( model ) / 12; -- Koopman eigenperiods
 % uPhi  = getProjectedData( model ); -- Projected data onto NLSA eigenfunctons
 % uZ    = getKoopmanProjectedData( model ); -- Proj. data onto Koopman eigenfunctions
+% newx = getReconstructedData(model);
+% Zreconstruct = getKoopmanReconstructedData(model);
 %
 % Koopman eigenfrequencies are the imaginary part of gamma, and are in units
 % of 1/day.
@@ -18,7 +20,7 @@
 %% DATA ANALYSIS SPECIFICATION 
 tLim       = { '20120101' '20130230' };
 sourceVar  = 'z500' %'lwa';     
-embWindow  = 20;       
+embWindow  = 50;       
 %kernel     = 'cone';       % cone kernel      
 kernel     = 'l2';       % L2 kernel      
 
@@ -187,6 +189,7 @@ if ifNLSARec
 
     disp( 'Reconstruction of target data from kernel eigenfunctions...' ); 
     t = tic;
+    % arguments are obj, iB, iC, iR, iRec, nPar
     computeReconstruction( model, [],[], [], [], nPar  )
     toc( t )
 end
