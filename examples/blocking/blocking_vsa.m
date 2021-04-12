@@ -17,7 +17,7 @@
 
 %% DATA ANALYSIS SPECIFICATION 
 tLim       = { '20120101' '20130230' };
-sourceVar  = 'z500';     
+sourceVar  = 'z500' %'lwa';     
 embWindow  = 20;       
 %kernel     = 'cone';       % cone kernel      
 kernel     = 'l2';       % L2 kernel      
@@ -29,15 +29,15 @@ kernel     = 'l2';       % L2 kernel
 ifDataSource = false;  % extract source data fron netCDF files
 
 % Spectral decomposition
-ifNLSA    = true;  % compute kernel (NLSA) eigenfunctions
-ifKoopman = true;  % compute Koopman eigenfunctions
+ifNLSA    = false;  % compute kernel (NLSA) eigenfunctions
+ifKoopman = false;  % compute Koopman eigenfunctions
 
 % Reconstruction
 ifNLSARec    = true; % do reconstruction based on NLSA
-ifKoopmanRec = true; % do reconstruction based on Koopman 
+ifKoopmanRec = false;  % do reconstruction based on Koopman 
 
 iProc = 1;
-nProc = 4;
+nProc = 1;
 %% EXTRACT SOURCE DATA
 if ifDataSource
     disp( sprintf( 'Reading source data %s...', sourceVar ) ); t = tic;
@@ -60,7 +60,7 @@ experiment = { sourceVar ...
                [ tLim{ 1 } '-' tLim{ 2 } ] ...
                sprintf( 'emb%i', embWindow ) ...
                [ kernel 'Kernel' ]  };
-experiment = strjoin_e( experiment, '_' );
+experiment = strjoin_e( experiment, '_' )
 
 [ model, In ] = blocking_vsaModel( experiment ); 
 toc( t )
