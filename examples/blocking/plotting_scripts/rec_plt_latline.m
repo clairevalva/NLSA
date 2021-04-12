@@ -1,7 +1,7 @@
-plotx = reshape(newx, 41, [], 240);
+plotx = reshape(actx, 41, [], 240);
 unw = reshape(w, 240, 41).^-1;
 latline = 186; % about 80 W, want to see march washington heat wave"
-savename = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/reconstructions/diff_2to12_z500_80W_embed50.png";
+savename = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/reconstructions/actual_z500_80W.png";
 startdate = datetime(2012,01, 01);
 
 nY = 41;
