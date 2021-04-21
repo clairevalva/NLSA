@@ -18,9 +18,9 @@
 % Modified 2021/03/18
 
 %% DATA ANALYSIS SPECIFICATION 
-tLim       = { '20120101' '20130230' };
-sourceVar  = 'z500' %'lwa';     
-embWindow  = 50;       
+tLim       = { '20090101' '20120230' };
+sourceVar  = 'z500';     
+embWindow  = 20;       
 %kernel     = 'cone';       % cone kernel      
 kernel     = 'l2';       % L2 kernel      
 
@@ -28,14 +28,14 @@ kernel     = 'l2';       % L2 kernel
 %% SCRIPT EXECUTION OPTIONS
 
 % Data extraction
-ifDataSource = false;  % extract source data fron netCDF files
+ifDataSource = true;  % extract source data fron netCDF files
 
 % Spectral decomposition
-ifNLSA    = false;  % compute kernel (NLSA) eigenfunctions
-ifKoopman = false;  % compute Koopman eigenfunctions
+ifNLSA    = true;  % compute kernel (NLSA) eigenfunctions
+ifKoopman = true;  % compute Koopman eigenfunctions
 
 % Reconstruction
-ifNLSARec    = true; % do reconstruction based on NLSA
+ifNLSARec    = false; % do reconstruction based on NLSA
 ifKoopmanRec = false;  % do reconstruction based on Koopman 
 
 iProc = 1;

@@ -43,12 +43,14 @@ case 'z500'
 
 case 'lwa'
     % Directory for input data 
+    DataSpecs.Domain.yLim = [ 30 90 ];
     DataSpecs.In.dir = '/kontiki6/cnv5172/NLSA/examples/blocking/';
     DataSpecs.In.dir  = fullfile( DataSpecs.In.dir, 'LWA_data' );
     DataSpecs.In.file = 'LWA2';
     DataSpecs.In.var  = "lwa";
+    DataSpecs.Domain
     importData_vsa_LWA( DataSpecs )
-
+    
 otherwise
     error( 'Invalid input variable' )
 end

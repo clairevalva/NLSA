@@ -81,15 +81,17 @@ netcdf.close( ncId );
 % Create longitude-latitude grid, assumping 1.5 degree resolution
 dLon = 1.5; 
 dLat = 1.5;
+nY
 lon = ( 0 : nX - 1 ) * dLon;
 lon = lon( : ); % make into column vector 
 lat = ( 0 : nY - 1 ) * dLat;
-lat = lat( : ) - 90;
+lat = lat( : );
+lat
 [ X, Y ] = ndgrid( lon, lat );
 
 % Create region mask 
 ifXY = X >= Domain.xLim( 1 ) & X <= Domain.xLim( 2 ) ...
-     & Y == 45;
+     & Y >= Domain.yLim( 1 ) & Y <= Domain.yLim( 2 );
 iXY = find( ifXY( : ) );
 nXY = length( iXY );
 ifX = lon >= Domain.xLim( 1 ) & lon <= Domain.xLim( 2 );
@@ -169,6 +171,7 @@ nDG = nY2; % still weird and ask
 
 % Data dimension for each snapshot
 nD = nG * nDG;
+nD
 
 %% RETURN AND WRITE DATA
 % Grid information
