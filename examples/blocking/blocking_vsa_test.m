@@ -1,5 +1,12 @@
 %% VSA/KOOPMAN ANALYSIS OF Z500 DATA FOR BLOCKING
 %
+% can alternatively run to build the model:
+% experiment ='z500_20090101-20150101_emb20_l2Kernel'
+% givephi = [5];
+% [ model, In ] = blocking_vsaModel_test( experiment, givephi ); 
+% 
+% nSE          = getNTotalSample( model.embComponent );
+% nSB          = getNXB( model.embComponent );
 % phi   = getDiffusionEigenfunctions( model ); -- NLSA eigenfunctions
 % I think phi should be reshaped as (240, 233) but weird to interpret this i think
 % z     = getKoopmanEigenfunctions( model );   -- Koopman eigenfunctions
@@ -18,25 +25,27 @@
 % Modified 2021/03/18
 
 %% DATA ANALYSIS SPECIFICATION 
-tLim       = { '20120101' '20130229' };
-sourceVar  = 'lwa'; % 'z500'; % 'lwa';     
+%tLim       = { '20090101' '20120230' }; % longer run
+tLim       = { '20090101' '20150101' };
+%tLim = { '20120101' '20130230' };
+sourceVar  = 'z500';     
 embWindow  = 20;       
 %kernel     = 'cone';       % cone kernel      
-kernel     = 'l2';       % L2 kernel      
-
+kernel     = 'l2';       % L2 kernel     
 
 %% SCRIPT EXECUTION OPTIONS
 
 % Data extraction
-ifDataSource = true;  % extract source data fron netCDF files
+ifDataSource = false;  % extract source data fron netCDF files
 
 % Spectral decomposition
-ifNLSA    = true;  % compute kernel (NLSA) eigenfunctions
-ifKoopman = true;  % compute Koopman eigenfunctions
+ifNLSA    = false;  % compute kernel (NLSA) eigenfunctions
+ifKoopman = false;  % compute Koopman eigenfunctions
 
 % Reconstruction
-ifNLSARec    = true; % do reconstruction based on NLSA
-ifKoopmanRec = true;  % do reconstruction based on Koopman 
+givephi = [5];
+ifNLSARec    = false; % do reconstruction based on NLSA
+ifKoopmanRec = false;  % do reconstruction based on Koopman 
 
 iProc = 1;
 nProc = 1;
@@ -64,7 +73,7 @@ experiment = { sourceVar ...
                [ kernel 'Kernel' ]  };
 experiment = strjoin_e( experiment, '_' )
 
-[ model, In ] = blocking_vsaModel( experiment ); 
+[ model, In ] = blocking_vsaModel_test( experiment, givephi ); 
 toc( t )
 
 nSE          = getNTotalSample( model.embComponent );
@@ -190,7 +199,7 @@ if ifNLSARec
     disp( 'Reconstruction of target data from kernel eigenfunctions...' ); 
     t = tic;
     % arguments are obj, iB, iC, iR, iRec, nPar
-    computeReconstruction( model, [],[], [], [], nPar  )
+    computeReconstruction( model, [],[], [], [], nPar  );
     toc( t )
 end
     

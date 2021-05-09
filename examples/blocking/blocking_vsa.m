@@ -18,7 +18,9 @@
 % Modified 2021/03/18
 
 %% DATA ANALYSIS SPECIFICATION 
-tLim       = { '20090101' '20120230' };
+%tLim       = { '20090101' '20120230' }; % longer run
+tLim       = { '20090101' '20150101' };
+%tLim = { '20120101' '20130230' };
 sourceVar  = 'z500';     
 embWindow  = 20;       
 %kernel     = 'cone';       % cone kernel      
@@ -28,11 +30,11 @@ kernel     = 'l2';       % L2 kernel
 %% SCRIPT EXECUTION OPTIONS
 
 % Data extraction
-ifDataSource = true;  % extract source data fron netCDF files
+ifDataSource = false;  % extract source data fron netCDF files
 
 % Spectral decomposition
-ifNLSA    = true;  % compute kernel (NLSA) eigenfunctions
-ifKoopman = true;  % compute Koopman eigenfunctions
+ifNLSA    = false;  % compute kernel (NLSA) eigenfunctions
+ifKoopman = false;  % compute Koopman eigenfunctions
 
 % Reconstruction
 ifNLSARec    = false; % do reconstruction based on NLSA
@@ -190,7 +192,7 @@ if ifNLSARec
     disp( 'Reconstruction of target data from kernel eigenfunctions...' ); 
     t = tic;
     % arguments are obj, iB, iC, iR, iRec, nPar
-    computeReconstruction( model, [],[], [], [], nPar  )
+    computeReconstruction( model, [],[], [], [], nPar  );
     toc( t )
 end
     
