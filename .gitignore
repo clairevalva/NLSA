@@ -1,0 +1,9 @@
+# Ignore IDE specific files
+.vscode/
+
+#ignore data files
+*.mat
+examples/blocking/data/
+examples/blocking/LWA_data/
+examples/blocking/z500_data/
+
