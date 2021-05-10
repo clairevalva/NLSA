@@ -1,6 +1,6 @@
 
-% x     =getData(model.srcComponent); 
-toload   =  getProjectedData( model );
+ x     =getData(model.srcComponent); 
+% toload   =  getProjectedData( model );
 test = reshape(toload(:,1), [],20);
 % test = reshape(x, 41, [], 240);
 
