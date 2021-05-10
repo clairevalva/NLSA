@@ -1,15 +1,14 @@
 phi   = getDiffusionEigenfunctions( model ); % can comment this out if want to load else
-%z     = getKoopmanEigenfunctions( model );
+%z     = imag(getKoopmanEigenfunctions( model ));
 isz = true;
-savepre = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/reconstructions/hov_lon36_phi_";
-numeigs = 16; %int(size(phi,2));
-lonsave = 24;
+savepre = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/reconstructions/hov_phi_z500_09to15_";
+numeigs = 32; %int(size(phi,2));
 
 unw = reshape(w, 240, 41).^-1;
-toplot = reshape(phi, 41, [],240, 16); % check if this is the proper order?
-startdate = datetime(2012,01, 01); 
+toplot = reshape(phi, [],240, numeigs); % check if this is the proper order?
+startdate = datetime(2009,01, 01); 
 
-lentime = size(toplot,2);
+lentime = size(toplot,1);
 hhh = 0:(lentime-1);
 hrs = hours(hhh*6);
 dts = startdate + hrs;
@@ -24,20 +23,21 @@ lon = ( 0 : nX - 1 ) * dLon;
 
 
 
-for i = 1:2 %1:numeigs
+for i = 1:32
 
-    formatted = squeeze(toplot(i,:,lonsave,:)*unw(lonsave,:));
-    size(formatted)
-
+    formatted = squeeze(toplot(:,:,i));%*unw(lonsave,:));)
+    size(formatted);
+    mm = max(abs(formatted), [], "all")
     hfig = figure('visible','off');
     figure('position', [1, 1, 500, 1000])
-    contourf(dts, lat , formatted, 30,'LineColor', 'none')
-    xlabel("date")
-    ylabel("deg E")
-    yt = xticks;
-    xticklabels(datestr(yt));
+    contourf(lon, datenum(dts), formatted, 30,'LineColor', 'none')
+    xlabel("deg E")
+    ylabel("date")
+    yt = yticks;
+    yticklabels(datestr(yt));
     h = colorbar;
-    ylabel(h, 'z500 comp (m)');
+    caxis([-1*mm, mm])
+    ylabel(h, 'z500 comp (m/s)');
     savename = savepre + string(i) + ".png"
 
     print('-dpng','-r500',savename)
