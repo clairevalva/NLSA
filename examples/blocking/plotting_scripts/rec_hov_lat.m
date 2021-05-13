@@ -1,24 +1,27 @@
-function f = rec_hov_lat(wantrec, latind, totall)
+function f = rec_hov_lat(wantrec, latind, totall, choosetype)
 
-    % want rec is the reconstruction I want to look at
-    batch_list = [48, 96]; % also 48, 36??
-    save_pre = "/scratch/cnv5172/NLSA/examples/blocking/figs/reconstructions/test2_hov_rec_phi_"
-    
     % get grid and weights
     makegrid; % will just want lon from this but that is ok
     wgts;
 
     rrr = wantrec;
 
+    % pull the reconstructed data, if choosetype == true is phi
+    if choosetype
+        get_model_changephi;
+        arr = reshape(newx, 41, 240, []);
+        named = "phi";
+    else
+        get_model_changez;
+        arr = real(reshape(zreconstruct, 41, 240, []));
+        named = "z";
+    end
+
+    save_pre = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/reconstructions/hov_rec_" + string(named) + "_"
     savename = save_pre + string(wantrec) + "_lat_" + string(30 + 1.5*latind) + ".png";
-    savename_spectra = "/scratch/cnv5172/NLSA/examples/blocking/figs/spectra/spectra_phi_" + string(wantrec) + "_lat_" + string(30 + 1.5*latind) + ".png";
-    % pull the reconstructed data
-    get_model_changephi;
-    arr = reshape(newx, 41, 240, []);
+    savename_spectra = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/spectra/spectra_" + string(named) + "_" + string(wantrec) + "_lat_" + string(30 + 1.5*latind) + ".png";
 
     plot_arr = transpose(squeeze(arr(latind,:,:)));
-    size(plot_arr)
-    
 
     startdate = datetime(2009,01, 01); 
 
@@ -56,8 +59,6 @@ function f = rec_hov_lat(wantrec, latind, totall)
     print('-dpng','-r500',savename)
     close
 
-
-
     % also plot the spectra
     figure('position', [1, 1, 1000, 600])
     contourf(timefreq,spacefreq, fftshift(log(abs(transformed))), 30,'LineColor', 'none')
@@ -67,7 +68,7 @@ function f = rec_hov_lat(wantrec, latind, totall)
     xlabel("wavenumber")
     xlim([-120, 120])
     ylim([0, 0.5])
-    title("rec with phi " + string(wantrec))
+    title("rec with " + named + " " + string(wantrec))
 
     h = colorbar;
     ylabel(h, 'power');
