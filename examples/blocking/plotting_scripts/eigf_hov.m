@@ -1,11 +1,11 @@
-phi   = getDiffusionEigenfunctions( model ); % can comment this out if want to load else
-%z     = imag(getKoopmanEigenfunctions( model ));
+%phi   = getDiffusionEigenfunctions( model ); % can comment this out if want to load else
+%z     = getKoopmanEigenfunctions( model );
 isz = true;
-savepre = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/reconstructions/hov_phi_z500_09to15_";
-numeigs = 32; %int(size(phi,2));
-
+savepre = "/kontiki6/cnv5172/NLSA/examples/blocking/figs/eigenfunctions/morez/hov_zeig_imag_z500_09to15_";
+numeigs = 300; %int(size(phi,2));
+lenplot = 4000;
 unw = reshape(w, 240, 41).^-1;
-toplot = reshape(phi, [],240, numeigs); % check if this is the proper order?
+toplot = imag(reshape(z, [],240, numeigs)); % check if this is the proper order?
 startdate = datetime(2009,01, 01); 
 
 lentime = size(toplot,1);
@@ -23,14 +23,14 @@ lon = ( 0 : nX - 1 ) * dLon;
 
 
 
-for i = 1:32
+for i = 2:100
 
     formatted = squeeze(toplot(:,:,i));%*unw(lonsave,:));)
     size(formatted);
     mm = max(abs(formatted), [], "all")
     hfig = figure('visible','off');
     figure('position', [1, 1, 500, 1000])
-    contourf(lon, datenum(dts), formatted, 30,'LineColor', 'none')
+    contourf(lon, datenum(dts(1:lenplot)), formatted(1:lenplot, :), 30,'LineColor', 'none')
     xlabel("deg E")
     ylabel("date")
     yt = yticks;

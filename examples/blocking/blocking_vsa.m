@@ -1,14 +1,14 @@
 %% VSA/KOOPMAN ANALYSIS OF Z500 DATA FOR BLOCKING
-%
+% argument order: ( model, iB, iR, iC, iA )
 % phi   = getDiffusionEigenfunctions( model ); -- NLSA eigenfunctions
 % I think phi should be reshaped as (240, 233) but weird to interpret this i think
 % z     = getKoopmanEigenfunctions( model );   -- Koopman eigenfunctions
-% gamma = getKoopmanEigenvalues( model ) * 12 / (2*pi) -- Koopman eigenvalues  
+% gamma = getKoopmanEigenvalues( model ) * 20 / (2*pi) -- Koopman eigenvalues  
 % T     = getKoopmanEigenperiods( model ) / 12; -- Koopman eigenperiods
 % uPhi  = getProjectedData( model ); -- Projected data onto NLSA eigenfunctons
 % uZ    = getKoopmanProjectedData( model ); -- Proj. data onto Koopman eigenfunctions
 % newx = getReconstructedData(model);
-% Zreconstruct = getKoopmanReconstructedData(model);
+% zreconstruct = getKoopmanReconstructedData(model);
 %
 % Koopman eigenfrequencies are the imaginary part of gamma, and are in units
 % of 1/day.
@@ -129,7 +129,7 @@ if ifNLSA
     computeDenBandwidthNormalization( model );
     toc( t )
 
-    disp( 'Density kernel sum...' ); t = tic;
+    disp( 'Density kernel sum...' ); t = tic; 
     computeDenKernelDoubleSum( model )
     toc( t )
 
@@ -169,6 +169,7 @@ if ifNLSA
     disp( 'Kernel eigenfunctions...' ); t = tic;
     computeDiffusionEigenfunctions( model )
     toc( t )
+
 end
 
 %% COMPUTE EIGENFUNCTIONS OF KOOPMAN GENERATOR
@@ -176,6 +177,7 @@ if ifKoopman
     disp( 'Koopman eigenfunctions...' ); t = tic;
     computeKoopmanEigenfunctions( model, 'ifLeftEigenfunctions', true )
     toc( t )
+    disp(2 + 2)
 end
 
 %% PERFORM NLSA RECONSTRUCTION

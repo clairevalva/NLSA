@@ -61,8 +61,8 @@ case 'z500_20090101-20120230_emb20_l2Kernel'
     In.Trg( 1 ).embFormat = 'overlap';  % storage format 
 
     % Batches to partition the in-sample data
-    In.Res( 1 ).nB    = 48; % partition batches
-    In.Res( 1 ).nBRec = 48; % batches for reconstructed data
+    In.Res( 1 ).nB    = 24; % partition batches
+    In.Res( 1 ).nBRec = 24; % batches for reconstructed data
 
     % NLSA parameters; in-sample data 
     In.nN         = 3000;          % nearest neighbors; defaults to max. value if 0
@@ -79,9 +79,9 @@ case 'z500_20090101-20120230_emb20_l2Kernel'
     In.epsilonE   = [ -40 40 ]; % kernel bandwidth exponents 
     In.nEpsilon   = 200;        % number of exponents for bandwidth tuning
     In.alpha      = 0.5;        % diffusion maps normalization 
-    In.nPhi       = 32;         % diffusion eigenfunctions to compute
+    In.nPhi       = 64;         % diffusion eigenfunctions to compute
     In.nPhiPrj    = In.nPhi;    % eigenfunctions to project the data
-    In.idxPhiRec  = {[ 2:12] };    % eigenfunctions for reconstruction
+    In.idxPhiRec  = {[ 2:64] };    % eigenfunctions for reconstruction
     In.idxPhiSVD  = 1 : 1;        % eigenfunctions for linear mapping
     In.idxVTRec   = 1 : 1;        % SVD termporal patterns for reconstruction
 
@@ -106,12 +106,12 @@ case 'z500_20090101-20120230_emb20_l2Kernel'
     In.koopmanAntisym = true;      % enforce antisymmetrization
     In.koopmanEpsilon = 1.0E-3;      % regularization parameter
     In.koopmanRegType = 'inv';     % regularization type
-    In.idxPhiKoopman  = 1 : 32;   % diffusion eigenfunctions used as basis
+    In.idxPhiKoopman  = 1 : 64;   % diffusion eigenfunctions used as basis
     In.nPhiKoopman    = numel( In.idxPhiKoopman ); % eigenfunctions to compute
     In.nKoopmanPrj    = In.nPhiKoopman; % eigenfunctions to project the data 
     In.idxKoopmanRec  = [ 2:12];
 
-case 'lwa_20090101-20120230_emb20_l2Kernel'
+case 'lwa_20090101-20120230_emb20_l2Kernel_no'
 
     % Dataset specification  
     In.Res( 1 ).experiment = 'blocking';                
@@ -347,9 +347,10 @@ case 'z500_20090101-20150101_emb20_l2Kernel'
     In.epsilonE   = [ -40 40 ]; % kernel bandwidth exponents 
     In.nEpsilon   = 200;        % number of exponents for bandwidth tuning
     In.alpha      = 0.5;        % diffusion maps normalization 
-    In.nPhi       = 32;         % diffusion eigenfunctions to compute
+    In.nPhi       = 1000;%32;         % diffusion eigenfunctions to compute
+                                %1000 eigenfunctions took approx 70 hours
     In.nPhiPrj    = In.nPhi;    % eigenfunctions to project the data
-    In.idxPhiRec  = {[33]};    % eigenfunctions for reconstruction
+    In.idxPhiRec  = {[18:32]};    % eigenfunctions for reconstruction
     % done [ 2:12], sessions are: [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15], [16]
     % [18], [17], [19], [20]. [21], [22], [23], [24], [25], [26], [27], [28], [29], [30], [31], [32]
     %[33], [34], 
@@ -377,10 +378,10 @@ case 'z500_20090101-20150101_emb20_l2Kernel'
     In.koopmanAntisym = true;      % enforce antisymmetrization
     In.koopmanEpsilon = 1.0E-3;      % regularization parameter
     In.koopmanRegType = 'inv';     % regularization type
-    In.idxPhiKoopman  = 1 : 32;   % diffusion eigenfunctions used as basis
-    In.nPhiKoopman    = numel( In.idxPhiKoopman ); % eigenfunctions to compute
+    In.idxPhiKoopman  = 1 : 1000;   % diffusion eigenfunctions used as basis
+    In.nPhiKoopman    = 300 %numel( In.idxPhiKoopman ); % eigenfunctions to compute
     In.nKoopmanPrj    = In.nPhiKoopman; % eigenfunctions to project the data 
-    In.idxKoopmanRec  = {[5]}; % done [ 4:12]
+    In.idxKoopmanRec  = {[8]}; % done [ 4:12]
 
 case 'z500_20120101-20130230_emb20_l2Kernel'
 
