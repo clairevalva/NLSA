@@ -1,3 +1,5 @@
 addpath( genpath( 'nlsa'  ) )
 addpath( genpath( 'examples/blocking'  ) )
+addpath( genpath( 'examples/blocking/plotting_scripts'  ) )
+addpath( genpath( 'examples/blocking/utils_rand'  ) )
 % addpath( genpath( 'plotting_scripts'  ) )
